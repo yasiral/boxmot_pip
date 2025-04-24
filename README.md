@@ -54,11 +54,10 @@ Start with a [**Python>=3.9**](https://www.python.org/) environment.
 If you want to run the RFDETR, YOLOX or YOLOv12 examples:
 
 ```
-git clone https://github.com/mikel-brostrom/boxmot.git
-cd boxmot
-pip install uv
-uv sync --group yolo
-activate .venv/bin/activate
+!pip install -q uv
+!git clone -q https://github.com/yasiral/boxmot_pip.git
+%cd boxmot_pip
+!uv pip install -e . --group yolo --system
 ```
 
 but if you only want to import the tracking modules you can simply:
@@ -68,6 +67,35 @@ pip install boxmot
 ```
 
 ## RFDETR | YOLOX | YOLOv12 examples
+<details>
+<summary>Combined Commands</summary>
+
+
+```bash
+!python tracking/track.py \
+        --source "$video_path" \
+        --yolo-model yolov8s.pt \
+        --tracking-method deepocsort \
+        --reid-model osnet_x0_25_msmt17.pt \
+        --conf 0.25 --save --device cpu
+
+!python tracking/track.py \
+        --source "$video_path" \
+        --yolo-model yolov8n-seg \
+        --tracking-method deepocsort \
+        --reid-model osnet_x0_25_msmt17.pt \
+        --conf 0.25 --save --device cpu
+
+!python tracking/track.py \
+        --source "$video_path" \
+        --yolo-model yolov8n-seg\
+        --tracking-method strongsort \
+        --reid-model osnet_x0_25_msmt17.pt \
+        --conf 0.25 --save --device cpu
+```
+
+  </details>
+
 
 <details>
 <summary>Tracking</summary>
