@@ -114,14 +114,18 @@ def run(args):
 
     for r in results:
 
-        img = yolo.predictor.trackers[0].plot_results(r.orig_img, args.show_trajectories)
+        
+        if hasattr(yolo.predictor.trackers[0], "plot_results"):
+            img = yolo.predictor.trackers[0].plot_results(r.orig_img, args.show_trajectories)
+        else:
+           # Ultralytics Results handles its own image internally
+            img = r.plot()
 
         if args.show is True:
             cv2.imshow('BoxMOT', img)     
             key = cv2.waitKey(1) & 0xFF
             if key == ord(' ') or key == ord('q'):
                 break
-
 
 def parse_opt():
     
